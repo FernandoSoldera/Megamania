@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1Movement : MonoBehaviour {
+public class Enemy1Controller : MonoBehaviour {
 
     public float speed;
 
@@ -15,4 +15,13 @@ public class Enemy1Movement : MonoBehaviour {
 	void Update () {
         transform.Translate(new Vector3(Time.deltaTime * speed, 0, 0));
 	}
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag.Equals("Fire"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
