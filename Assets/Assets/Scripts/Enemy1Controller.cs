@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy1Controller : MonoBehaviour {
 
     public float speed;
+    private GameController gameController;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        gameController = new GameController();
+        gameController.scoreText = GameObject.FindWithTag("Score").GetComponent<Text>() as Text;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,6 +25,7 @@ public class Enemy1Controller : MonoBehaviour {
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
+            gameController.IncreaseScore(20);
         }
     }
 }

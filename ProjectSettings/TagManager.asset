@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
+  - Score
+  - Canvas
+  - Enemy1
   layers:
   - Default
   - TransparentFX
