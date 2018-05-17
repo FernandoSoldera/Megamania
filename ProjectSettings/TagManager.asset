@@ -8,6 +8,8 @@ TagManager:
   - Score
   - Canvas
   - Enemy1
+  - FireEnemy
+  - Wall
   layers:
   - Default
   - TransparentFX

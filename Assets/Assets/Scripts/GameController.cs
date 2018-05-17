@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        //Instantiate the lifes
         for(int i=0; i<3; i++)
         {
             float position = life1positionX + (40 * i);
@@ -27,6 +29,7 @@ public class GameController : MonoBehaviour {
             lifes[i].transform.rotation = Quaternion.Euler(0,0,-90);
             lifes[i].GetComponent<RectTransform>().localPosition = new Vector3(position, life1positionY, 0);        }
 
+        //Instantiate the enemys
         for (int i=0; i < 15; i++)
         {
             if(i % 2 == 1)
@@ -47,21 +50,25 @@ public class GameController : MonoBehaviour {
         VerifyEnemyFire();
 	}
 
+    //Function to increase the score with the parameter
     public void IncreaseScore(float score)
     {
         scoreText.text = (float.Parse(scoreText.text) + score).ToString();
     }
 
+    //Function to verificate if enemys is already to shoot (choose a enemy ramdomly)
     private void VerifyEnemyFire()
     {
         if(controlFires < Time.time)
         {
-            GameObject gameObject = GameObject.FindGameObjectWithTag("Enemy1");
+            GameObject[] enemysList = GameObject.FindGameObjectsWithTag("Enemy1");
+            int number = Random.Range(0, enemysList.Length-1);
+
+            Debug.Log(number + " " + enemysList.Length);
 
             if (gameObject != null)
             {
-                Debug.Log(controlFires);
-                Instantiate(fireEnemy, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, 0), new Quaternion());
+                Instantiate(fireEnemy, new Vector3(enemysList[number].transform.position.x, enemysList[number].transform.position.y - 1, 0), new Quaternion());
             }
             controlFires+=2;
         }

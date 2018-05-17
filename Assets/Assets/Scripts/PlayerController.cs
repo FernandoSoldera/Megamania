@@ -56,4 +56,12 @@ public class PlayerController : MonoBehaviour {
     {
         lifeBar.rectTransform.sizeDelta = new Vector2(Time.time*100/totalGameTime * 3.7f, 20);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag.Equals("FireEnemy"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }

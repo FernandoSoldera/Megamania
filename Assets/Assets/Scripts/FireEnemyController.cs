@@ -10,4 +10,12 @@ public class FireEnemyController : MonoBehaviour {
     {
         transform.Translate(new Vector3(0, Time.deltaTime * -verticalSpeed, 0));
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Wall"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
