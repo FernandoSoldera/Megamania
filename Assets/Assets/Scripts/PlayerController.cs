@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,29 +10,59 @@ public class PlayerController : MonoBehaviour {
     public float fireTime;
     private float timeCanFire;
     public float totalGameTime;
+    public float timeRestart = 0;
+    private bool isStarting = true;
+    public GameObject playerLifeStartingAudio;
 
     public GameObject fire;
     public Image lifeBar;
     public Image lifeBarBackground;
 
+    private GameController gameController;
+
     void Start()
     {
+        gameController = FindObjectOfType<GameController>();
         timeCanFire = 0;
     }
 
-    void Update() {
-        if (Input.GetButton("Fire1"))
+    void Update()
+    {
+        if(!gameController.isGamePaused)
         {
-            if (Time.time > timeCanFire)
+            if (Input.GetButton("Fire1"))
             {
-                Shoot();
-                timeCanFire = Time.time + fireTime;
+                if (Time.time > timeCanFire)
+                {
+                    Shoot();
+                    timeCanFire = Time.time + fireTime;
+                }
+            }
+            Movement();
+            if (lifeBar.rectTransform.sizeDelta.x <= lifeBarBackground.rectTransform.sizeDelta.x)
+            {
+                if (isStarting)
+                {
+                    StartingLife();
+                }
+                else
+                {
+                    CountTime();
+                }
+            }
+            else
+            {
+                //gameover
             }
         }
-        Movement();
-        if(lifeBar.rectTransform.sizeDelta.x < lifeBarBackground.rectTransform.sizeDelta.x)
+    }
+
+    public void StartingLife()
+    {
+        lifeBar.rectTransform.sizeDelta = new Vector2(370f - ((Time.time - timeRestart) * 250), 20);
+        if(lifeBar.rectTransform.sizeDelta.x <= 0)
         {
-            CountTime();
+            isStarting = false;
         }
     }
 
@@ -54,7 +85,8 @@ public class PlayerController : MonoBehaviour {
 
     private void CountTime()
     {
-        lifeBar.rectTransform.sizeDelta = new Vector2(Time.time*100/totalGameTime * 3.7f, 20);
+        float realTime = Time.time - timeRestart;
+        lifeBar.rectTransform.sizeDelta = new Vector2(realTime * 100/totalGameTime * 3.7f, 20);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -62,6 +94,15 @@ public class PlayerController : MonoBehaviour {
         if(collision.gameObject.tag.Equals("FireEnemy"))
         {
             Destroy(collision.gameObject);
+            if (gameController.lifes.Count > 0)
+            {
+                StartCoroutine(gameController.PlayerDied(gameObject));
+                isStarting = true;
+            }
+            else
+            {
+                //gameover
+            }
         }
     }
 }
