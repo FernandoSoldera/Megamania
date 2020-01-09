@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
@@ -24,11 +25,23 @@ public class PlayerController : MonoBehaviour {
     {
         gameController = FindObjectOfType<GameController>();
         timeCanFire = 0;
+        timeRestart = Time.time;
     }
 
     void Update()
     {
-        if(!gameController.isGamePaused)
+        if(Input.GetButton("F1"))
+        {
+            //reset
+            isStarting = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        if (Input.GetButton("F2"))
+        {
+            //quit
+            Application.Quit();
+        }
+        if (!gameController.isGamePaused)
         {
             if (Input.GetButton("Fire1"))
             {
@@ -53,6 +66,9 @@ public class PlayerController : MonoBehaviour {
             else
             {
                 //gameover
+                gameController.isGamePaused = true;
+                gameController.destroyEnemies();
+                gameObject.transform.position = new Vector3(0, -0.92f, 0);
             }
         }
     }
@@ -102,6 +118,9 @@ public class PlayerController : MonoBehaviour {
             else
             {
                 //gameover
+                gameController.isGamePaused = true;
+                gameController.destroyEnemies();
+                gameObject.transform.position = new Vector3(0, -0.92f, 0);
             }
         }
     }

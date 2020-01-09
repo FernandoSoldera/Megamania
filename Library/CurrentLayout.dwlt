@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 711, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 33
+  controlID: 13
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 324}
   m_MaxSize: {x: 4002, y: 8024}
   vertical: 1
-  controlID: 122
+  controlID: 14
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 34
+  controlID: 79
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -606,23 +606,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: e8280000
-      m_LastClickedID: 10472
-      m_ExpandedIDs: cefbffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 9cfffeffbafffefff600ffffe074ffffa87affffdefbffff18450000dc450000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: PlayerLifeStarting
-        m_OriginalName: PlayerLifeStarting
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -16500
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -670,7 +670,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Assets/Sounds
+    - Assets/Assets/Scripts
   m_ViewMode: 0
   m_StartGridSize: 48
   m_LastFolders: []
@@ -682,7 +682,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b0280000
     m_LastClickedID: 10416
-    m_ExpandedIDs: 000000003826000068260000f02600003427000092270000302800005e280000ca290000
+    m_ExpandedIDs: 0000000088090000b8090000400a0000840a0000e20a0000800b0000ae0b0000ce290000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -710,7 +710,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000003826000068260000f02600003427000092270000302800005e280000ca290000
+    m_ExpandedIDs: ffffffff0000000088090000b8090000400a0000840a0000e20a0000800b0000ae0b0000ce290000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

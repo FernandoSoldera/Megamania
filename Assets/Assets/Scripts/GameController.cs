@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
         playerController = FindObjectOfType<PlayerController>();
 
         //Instantiate the lifes
-        for (int i=0; i<3; i++)
+        for (int i=0; i<1; i++)
         {
             float position = life1positionX + (40 * i);
             lifes.Add(Instantiate(life, new Vector3(position, life1positionY, 0), new Quaternion(), canvas.transform));
@@ -104,11 +104,7 @@ public class GameController : MonoBehaviour {
         Destroy(lifes[lifes.Count - 1]);
         lifes.Remove(lifes[lifes.Count - 1]);
 
-        foreach (GameObject enemyToDestroy in enemies)
-        {
-            Destroy(enemyToDestroy);
-        }
-        enemies = new List<GameObject>();
+        destroyEnemies();
 
         positionInstantiateEnemyX = -5;
         //Instantiate the enemys
@@ -131,5 +127,14 @@ public class GameController : MonoBehaviour {
             positionInstantiateEnemyX += -1.5F;
         }
         player.GetComponent<AudioSource>().Play();
+    }
+
+    public void destroyEnemies()
+    {
+        foreach (GameObject enemyToDestroy in enemies)
+        {
+            Destroy(enemyToDestroy);
+        }
+        enemies = new List<GameObject>();
     }
 }
