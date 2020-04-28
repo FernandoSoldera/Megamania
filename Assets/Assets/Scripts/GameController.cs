@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour {
     public GameObject playerDyingSound;
     public bool isGamePaused = false;
     public PlayerController playerController;
+    public GameObject IncresingScoreAudio;
+    public int level = 1;
 
     // Use this for initialization
     void Start ()
@@ -38,7 +40,7 @@ public class GameController : MonoBehaviour {
         }
 
         //Instantiate the enemys
-        for (int i=0; i < 15; i++)
+        for (int i=0; i < 1; i++)
         {
             if(i % 2 == 1)
             {
@@ -136,5 +138,25 @@ public class GameController : MonoBehaviour {
             Destroy(enemyToDestroy);
         }
         enemies = new List<GameObject>();
+    }
+
+    public void FinishEnemies()
+    {
+        StartCoroutine(ChangeLevel());
+    }
+
+    public IEnumerator ChangeLevel()
+    {
+        playerController.isChangingLevel = true;
+        IncresingScoreAudio.GetComponent<AudioSource>().Play();
+        float timeRemaning = (playerController.totalGameTime - (Time.time - playerController.timeRestart)) / 30;
+        playerController.totalGameTime = Time.time + timeRemaning;
+
+        yield return new WaitForSeconds(timeRemaning);
+
+        playerController.totalGameTime = 50f;
+
+        IncresingScoreAudio.GetComponent<AudioSource>().Stop();
+        level++;
     }
 }

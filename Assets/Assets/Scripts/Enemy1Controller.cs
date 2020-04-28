@@ -7,11 +7,13 @@ public class Enemy1Controller : MonoBehaviour {
 
     public float speed;
     private GameController gameController;
+    private PlayerController playerController;
 
 	// Use this for initialization
 	void Start ()
     {
         gameController = FindObjectOfType<GameController>();
+        playerController = FindObjectOfType<PlayerController>();
         gameController.scoreText = GameObject.FindWithTag("Score").GetComponent<Text>() as Text;
     }
 	
@@ -26,7 +28,7 @@ public class Enemy1Controller : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag.Equals("Fire"))
+        if (collision.gameObject.tag.Equals("Fire"))
         {
             gameController.GetComponent<AudioSource>().Play();
             Destroy(collision.gameObject);
@@ -34,6 +36,10 @@ public class Enemy1Controller : MonoBehaviour {
             gameController.enemies.Remove(gameObject);
             Destroy(gameObject);
             gameController.IncreaseScore(20);
+            if (gameController.enemies.Count == 0)
+            {
+                gameController.FinishEnemies();
+            }
         }
     }
 }

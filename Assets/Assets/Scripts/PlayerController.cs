@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public float timeRestart = 0;
     private bool isStarting = true;
     public GameObject playerLifeStartingAudio;
+    public bool isChangingLevel = false;
 
     public GameObject fire;
     public Image lifeBar;
@@ -65,10 +66,23 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
-                //gameover
-                gameController.isGamePaused = true;
-                gameController.destroyEnemies();
-                gameObject.transform.position = new Vector3(0, -0.92f, 0);
+                if(isChangingLevel)
+                {
+                    timeRestart = Time.time;
+                    lifeBar.rectTransform.sizeDelta = new Vector2(369, 20);
+                    gameObject.transform.position = new Vector3(0, -0.92f, 0);
+                    gameObject.GetComponent<AudioSource>().Play();
+
+                    isStarting = true;
+                    isChangingLevel = false;
+                }
+                else
+                {
+                    //gameover
+                    gameController.isGamePaused = true;
+                    gameController.destroyEnemies();
+                    gameObject.transform.position = new Vector3(0, -0.92f, 0);
+                }
             }
         }
     }
